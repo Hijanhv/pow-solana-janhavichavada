@@ -4,11 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Proof of Work on Solana &middot; Janhavi Chavada</title>
-<meta name="description" content="Every Solana program, dApp, hackathon submission and Turbin3 assignment Janhavi Chavada has shipped, from November 2024 to July 2026, with the technical detail behind each one." />
+<meta name="description" content="Every Solana program, dApp, hackathon submission and Turbin3 Builders assignment Janhavi Chavada has shipped, from November 2024 to September 2026, with the stack and the technical detail behind each one." />
 <meta name="author" content="Janhavi Chavada" />
 <meta property="og:title" content="Proof of Work on Solana &middot; Janhavi Chavada" />
-<meta property="og:description" content="23 builds on Solana: Anchor programs, dApps, hackathon submissions and Turbin3 Builders cohort assignments, with program IDs and architecture notes." />
+<meta property="og:description" content="25 builds on Solana: Anchor programs, dApps, four hackathon submissions and the full Turbin3 Builders cohort, with stacks, program IDs and repository links." />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://hijanhv.github.io/pow-solana-janhavichavada/" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@JanhaviChavada" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -37,7 +38,7 @@
   <section class="hero">
     <div class="hero__rule">
       <span class="mono">PROOF&nbsp;OF&nbsp;WORK</span>
-      <span class="mono dim">NOV 2024 &mdash;&nbsp;JUL 2026</span>
+      <span class="mono dim">NOV 2024 &mdash;&nbsp;SEP 2026</span>
     </div>
 
     <h1 class="hero__title">
@@ -47,10 +48,10 @@
 
     <div class="hero__grid">
       <p class="hero__lede">
-        Twenty-three things I built on Solana, in the order I built them. Anchor programs,
+        Twenty-five things I built on Solana, in the order I built them. Anchor programs,
         production dApps, four hackathon submissions and the full Turbin3 Builders cohort
-        assignment set. Program IDs, account layouts and the reasoning behind each design
-        are below, not just screenshots.
+        assignment set. Every entry lists its stack, its repository, its deployed link
+        where one exists, and the design decision that made it worth building.
       </p>
       <div class="hero__who">
         <p class="mono label">BUILDER</p>
@@ -65,7 +66,7 @@
     </div>
 
     <dl class="stats">
-      <div class="stat"><dt class="mono">PROJECTS</dt><dd>23</dd></div>
+      <div class="stat"><dt class="mono">PROJECTS</dt><dd>25</dd></div>
       <div class="stat"><dt class="mono">ANCHOR PROGRAMS</dt><dd>13</dd></div>
       <div class="stat"><dt class="mono">HACKATHONS</dt><dd>04</dd></div>
       <div class="stat"><dt class="mono">CLUSTERS</dt><dd>mainnet &middot; devnet</dd></div>
@@ -77,14 +78,14 @@
   <div class="filterbar" id="filterbar">
     <span class="mono dim filterbar__label">FILTER</span>
     <div class="filterbar__set" role="group" aria-label="Filter projects">
-      <button class="chip chip--filter is-on" data-filter="all">All</button>
-      <button class="chip chip--filter" data-filter="program">On-chain programs</button>
-      <button class="chip chip--filter" data-filter="app">dApps &amp; frontends</button>
-      <button class="chip chip--filter" data-filter="hackathon">Hackathon</button>
-      <button class="chip chip--filter" data-filter="turbin3">Turbin3</button>
-      <button class="chip chip--filter" data-filter="docs">Writing &amp; architecture</button>
+      <button class="chip chip--filter is-on" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip chip--filter" data-filter="program" aria-pressed="false">On-chain programs</button>
+      <button class="chip chip--filter" data-filter="app" aria-pressed="false">dApps &amp; frontends</button>
+      <button class="chip chip--filter" data-filter="hackathon" aria-pressed="false">Hackathon</button>
+      <button class="chip chip--filter" data-filter="turbin3" aria-pressed="false">Turbin3</button>
+      <button class="chip chip--filter" data-filter="docs" aria-pressed="false">Writing &amp; architecture</button>
     </div>
-    <span class="mono dim" id="count">23 shown</span>
+    <span class="mono dim" id="count">25 shown</span>
   </div>
 
   <!-- ==================== FLAGSHIP ==================== -->
@@ -92,7 +93,7 @@
     <div class="sect__head">
       <p class="mono label">SECTION 01</p>
       <h2>Shipped builds</h2>
-      <p class="sect__note">Public repos with a live deployment. Dates are the day the build landed.</p>
+      <p class="sect__note">Public repositories, most with a live deployment. Dates are the day the build landed.</p>
     </div>
 
     <div class="entries">
@@ -103,12 +104,16 @@
           <header class="entry__head">
             <h3>Favorites</h3>
             <p class="entry__kicker">The first program. Per-user state in a PDA.</p>
-            <p class="entry__meta mono"><span class="date">30 NOV 2024</span><span class="sep">/</span><span>Anchor 0.29 &middot; Rust &middot; TypeScript</span></p>
+            <p class="entry__meta mono"><span class="date">30 NOV 2024</span></p>
           </header>
           <div class="entry__body">
             <p>An Anchor program that stores a user's favorite number, color and hobby list on chain. Each user writes into a PDA derived from their own pubkey, so accounts never collide and nobody can overwrite anyone else's record. Bounded string and vector sizes are declared up front (color capped at 50 characters, at most five hobbies) because Solana accounts are fixed-size at allocation and rent is paid on the space you reserve.</p>
             <p>Small on purpose. It exists to get the whole loop right end to end: derive the address, size the account, write, then read it back from a TypeScript client.</p>
             <ul class="chips"><li class="chip">PDA derivation</li><li class="chip">Account sizing</li><li class="chip">Anchor IDL</li><li class="chip">TS client</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust &middot; Anchor 0.29 &middot; TypeScript &middot; Yarn</dd></div>
+              <div><dt class="mono">Network</dt><dd>Localnet / devnet</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/Favorites" target="_blank" rel="noopener">Repository &#8599;</a></p>
           </div>
         </div>
@@ -120,12 +125,16 @@
           <header class="entry__head">
             <h3>Cliff Chain</h3>
             <p class="entry__kicker">Token vesting with cliffs, as a monorepo.</p>
-            <p class="entry__meta mono"><span class="date">22 DEC 2024</span><span class="sep">/</span><span>Anchor &middot; Turborepo &middot; Next.js</span></p>
+            <p class="entry__meta mono"><span class="date">22 DEC 2024</span></p>
           </header>
           <div class="entry__body">
             <p>A vesting dApp for teams paying contributors in tokens. An organization creates a vesting account, then defines a schedule per employee with a start time, an end time, a cliff and an allocation. The program releases nothing before the cliff, then unlocks linearly, and the employee claims directly from the app.</p>
             <p>Built as a Turborepo workspace so the Anchor program, the shared UI package and the Next.js frontend build and deploy independently. Cluster switching (devnet, testnet, localnet, custom RPC) is a first-class part of the UI rather than an environment variable, which makes demoing against a fresh validator painless.</p>
-            <ul class="chips"><li class="chip">Vesting schedules</li><li class="chip">SPL tokens</li><li class="chip">Wallet Adapter</li><li class="chip">React Query + Jotai</li><li class="chip">Turborepo</li></ul>
+            <ul class="chips"><li class="chip">Vesting schedules</li><li class="chip">SPL tokens</li><li class="chip">Cluster management</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust &middot; Anchor &middot; Next.js &middot; TypeScript &middot; Tailwind &middot; React Query &middot; Jotai &middot; Solana Wallet Adapter &middot; Turborepo</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet, testnet, localnet, custom RPC</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/cliff-chain-submission" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://cliff-chain-submission-frontend.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a></p>
           </div>
         </div>
@@ -137,12 +146,16 @@
           <header class="entry__head">
             <h3>Phantom Lottery</h3>
             <p class="entry__kicker">A lottery where the draw is a transaction, not a promise.</p>
-            <p class="entry__meta mono"><span class="date">17 AUG 2025</span><span class="sep">/</span><span>Next.js 14 &middot; web3.js &middot; devnet</span></p>
+            <p class="entry__meta mono"><span class="date">17 AUG 2025</span></p>
           </header>
           <div class="entry__body">
             <p>A lottery dApp on devnet. A one-time <em>initialize master</em> transaction creates the global account that holds the lottery counter and the authority, and every lottery afterwards derives its own account from that counter. Players buy tickets, entries and the prize pool live on chain, and the authority picks a winner in a transaction anyone can inspect.</p>
             <p>The interesting part was making the setup step legible. Most of the README is spent explaining what initialization actually creates and why a program with no state cannot do anything, because that is the concept new users trip on first.</p>
-            <ul class="chips"><li class="chip">Global authority account</li><li class="chip">Ticket entries</li><li class="chip">Prize distribution</li><li class="chip">Phantom</li></ul>
+            <ul class="chips"><li class="chip">Global authority account</li><li class="chip">Ticket entries</li><li class="chip">Prize distribution</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Next.js 14 &middot; React 18 &middot; TypeScript &middot; Tailwind &middot; @solana/web3.js &middot; Wallet Adapter (Phantom)</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/phantom-lottery" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://phantom-lottery.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a></p>
           </div>
         </div>
@@ -154,12 +167,16 @@
           <header class="entry__head">
             <h3>TalentPool</h3>
             <p class="entry__kicker">Freelance marketplace and events, with NFT proof of attendance.</p>
-            <p class="entry__meta mono"><span class="date">25 DEC 2025</span><span class="sep">/</span><span>Next.js 14 &middot; spl-token &middot; Drizzle + Neon</span></p>
+            <p class="entry__meta mono"><span class="date">25 DEC 2025</span></p>
           </header>
           <div class="entry__body">
             <p>Two products sharing one identity layer. Gigs: post a service, get hired peer to peer, get paid in SOL with no platform cut. Events: sell tickets in SOL, check attendees in, then mint the ticket as an NFT so attendance is portable proof rather than a row in someone's database.</p>
             <p>On top of that sits an achievement system (event attendee, organizer, early adopter, super host, active participant) minted as SPL tokens into the user's wallet, so reputation is held by the person, not the platform. Off-chain data runs on serverless Next.js API routes over Drizzle and Neon Postgres with Zod validation at the boundary; the wallet is the login.</p>
-            <ul class="chips"><li class="chip">NFT tickets</li><li class="chip">Achievement badges</li><li class="chip">SOL payments</li><li class="chip">Multi-wallet auth</li><li class="chip">Drizzle ORM</li></ul>
+            <ul class="chips"><li class="chip">NFT tickets</li><li class="chip">Achievement badges</li><li class="chip">Wallet-based auth</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Next.js 14 &middot; TypeScript &middot; Tailwind &middot; Framer Motion &middot; React Query &middot; @solana/web3.js &middot; @solana/spl-token &middot; Wallet Adapter (Phantom, Solflare, Solong) &middot; Drizzle ORM &middot; Neon Postgres &middot; Zod</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/talent-pool" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://talent-pool-kappa.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a></p>
           </div>
         </div>
@@ -171,12 +188,16 @@
           <header class="entry__head">
             <h3>Charisma</h3>
             <p class="entry__kicker">Identity as a card, tribes as the graph.</p>
-            <p class="entry__meta mono"><span class="date">27 FEB 2026</span><span class="sep">/</span><span>Next.js 16 &middot; React 19 &middot; Privy &middot; Memo</span></p>
+            <p class="entry__meta mono"><span class="date">27 FEB 2026</span></p>
           </header>
           <div class="entry__body">
             <p>A social app built around archetypes. You take a quiz, you get a card, the card puts you in a tribe, and the tribe gives you quests, votes and a leaderboard. Vibes and SOL tips move between players, and on-chain writes go through the Memo program so a social action leaves a real, cheap, verifiable trace instead of needing a bespoke program.</p>
-            <p>Privy handles embedded wallets so a first-time user can play without installing anything, and the whole thing runs in demo mode with no wallet at all. The social graph uses the socialfi SDK. Covered by a Vitest suite with Testing Library.</p>
-            <ul class="chips"><li class="chip">Memo program writes</li><li class="chip">Privy embedded wallets</li><li class="chip">socialfi SDK</li><li class="chip">SOL tipping</li><li class="chip">Vitest</li></ul>
+            <p>Privy handles embedded wallets so a first-time user can play without installing anything, and the whole thing runs in demo mode with no wallet at all. The social graph uses the socialfi SDK, and the card exports as an image through html2canvas so it can be shared off-platform.</p>
+            <ul class="chips"><li class="chip">Memo program writes</li><li class="chip">Embedded wallets</li><li class="chip">SOL tipping</li><li class="chip">Quests &amp; XP</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Next.js 16 &middot; React 19 &middot; TypeScript &middot; Tailwind 4 &middot; Radix UI &middot; Framer Motion &middot; @solana/web3.js &middot; @solana-program/memo &middot; Privy &middot; socialfi &middot; Vitest &middot; Testing Library</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet, plus a walletless demo mode</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/charisma" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://charisma-ashy.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a></p>
           </div>
         </div>
@@ -188,12 +209,17 @@
           <header class="entry__head">
             <h3>PayCrew</h3>
             <p class="entry__kicker">One treasury that pays humans and AI agents.</p>
-            <p class="entry__meta mono"><span class="date">24 APR 2026</span><span class="sep">/</span><span class="flag">Solana Frontier 2026 &middot; Payments</span></p>
+            <p class="entry__meta mono"><span class="date">24 APR 2026</span><span class="sep">/</span><span class="flag">Solana Frontier 2026 &middot; Payments track</span></p>
           </header>
           <div class="entry__body">
             <p>Payroll for teams that employ both contractors and models. Fiat comes in through Dodo Payments (UPI, card, bank) and converts to USDC, which lands in a Squads v4 two-of-three multisig vault. Humans are paid on a schedule; AI tools are paid per API call over x402, the HTTP 402 flow, with a monthly budget cap enforced on chain so an agent physically cannot overspend its allowance.</p>
             <p>The security decision I care about most: every instruction in the Anchor program advances a durable nonce account atomically before doing anything else. That makes a signed payroll transaction impossible to replay, which is the exact vulnerability class behind the Drift exploit. It is built into the program, not exposed as a setting. Salary amounts are stored encrypted, mapped to the Arcium MXE integration path.</p>
-            <ul class="chips"><li class="chip">Durable nonce replay guard</li><li class="chip">Squads v4 multisig</li><li class="chip">x402 micropayments</li><li class="chip">Arcium MXE</li><li class="chip">Token-2022 USDC</li></ul>
+            <p>Anchor was chosen over Pinocchio deliberately: the typed IDL the frontend consumes directly is worth more here than raw compute savings.</p>
+            <ul class="chips"><li class="chip">Durable nonce replay guard</li><li class="chip">On-chain budget caps</li><li class="chip">Multisig treasury</li><li class="chip">Encrypted salaries</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust &middot; Anchor v1.0 &middot; Next.js 14 &middot; TypeScript &middot; Tailwind &middot; Wallet Adapter + Privy &middot; Squads Protocol v4 &middot; x402 &middot; Arcium MXE &middot; Token-2022 USDC &middot; Dodo Payments</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/PayCrew" target="_blank" rel="noopener">Repository &#8599;</a></p>
           </div>
         </div>
@@ -205,14 +231,19 @@
           <header class="entry__head">
             <h3>Noctex</h3>
             <p class="entry__kicker">A dark pool where the matching engine never sees the order.</p>
-            <p class="entry__meta mono"><span class="date">12 MAY 2026</span><span class="sep">/</span><span class="flag">Colosseum Frontier 2026 &middot; Encrypt &amp; Ika</span></p>
+            <p class="entry__meta mono"><span class="date">12 MAY 2026</span><span class="sep">/</span><span class="flag">Colosseum Frontier 2026 &middot; Encrypt &amp; Ika track</span></p>
           </header>
           <div class="entry__body">
             <p>Every order book on Solana publishes intent, which is why size gets front-run and why institutions route around DEXs entirely. Noctex keeps price and quantity encrypted from submit through match. Encrypt's FHE evaluates <span class="code">bid_price &gt;= ask_price</span> and <span class="code">min(bid_amount, ask_amount)</span> directly on ciphertexts, so the executor computes a fill without ever holding a plaintext value.</p>
             <p>Settlement is gated separately. The program controls an Ika dWallet under 2PC-MPC, so <span class="code">finalize_settlement</span> refuses to advance until a threshold of network nodes has signed the settlement digest the program approved. FHE hides what settles, MPC decides when it settles, and neither primitive alone is sufficient: without FHE the book leaks, without MPC one compromised key drains the contract.</p>
-            <ul class="chips"><li class="chip">Fully homomorphic matching</li><li class="chip">Ika 2PC-MPC dWallet</li><li class="chip">Ciphertext PDAs</li><li class="chip">LI.FI</li><li class="chip">Anchor</li></ul>
-            <p class="idline mono"><span class="dim">DEVNET PROGRAM</span> <button class="copy" data-copy="833YAgrbapXnLiYkUq6tG6hWfZ7whX34Xs7CtBN8Nrvx" title="Copy program ID">833YAgrbapXnLiYkUq6tG6hWfZ7whX34Xs7CtBN8Nrvx</button></p>
-            <p class="links"><a href="https://github.com/Hijanhv/noctex" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://noctex.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a><a href="https://youtu.be/gF-waPYkcXc" target="_blank" rel="noopener">Demo video &#8599;</a><a href="https://noctex-pitch-deck.tiiny.site/" target="_blank" rel="noopener">Pitch deck &#8599;</a></p>
+            <p>The chain stores ciphertext PDAs rather than values, so outputs stay composable with ordinary downstream Solana primitives.</p>
+            <ul class="chips"><li class="chip">Fully homomorphic matching</li><li class="chip">Threshold settlement</li><li class="chip">Ciphertext PDAs</li><li class="chip">MEV resistance</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust &middot; Anchor &middot; Encrypt FHE SDK &middot; Ika 2PC-MPC dWallet &middot; LI.FI &middot; Next.js &middot; TypeScript &middot; @coral-xyz/anchor &middot; @solana/web3.js</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet</dd></div>
+              <div><dt class="mono">Program</dt><dd><button class="copy" data-copy="833YAgrbapXnLiYkUq6tG6hWfZ7whX34Xs7CtBN8Nrvx" title="Copy program ID">833YAgrbapXnLiYkUq6tG6hWfZ7whX34Xs7CtBN8Nrvx</button></dd></div>
+            </dl>
+            <p class="links"><a href="https://github.com/Hijanhv/noctex" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://noctex.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a><a href="https://youtu.be/gF-waPYkcXc" target="_blank" rel="noopener">Demo video &#8599;</a><a href="https://youtu.be/tnDzajQjYvU" target="_blank" rel="noopener">Pitch video &#8599;</a><a href="https://noctex-pitch-deck.tiiny.site/" target="_blank" rel="noopener">Pitch deck &#8599;</a><a href="https://explorer.solana.com/address/833YAgrbapXnLiYkUq6tG6hWfZ7whX34Xs7CtBN8Nrvx?cluster=devnet" target="_blank" rel="noopener">Explorer &#8599;</a></p>
           </div>
         </div>
       </article>
@@ -222,16 +253,20 @@
         <div class="entry__main">
           <header class="entry__head">
             <h3>Cardon</h3>
-            <p class="entry__kicker">A transaction firewall for autonomous agents. Turbin3 capstone.</p>
+            <p class="entry__kicker">A transaction firewall for autonomous agents. The Turbin3 capstone.</p>
             <p class="entry__meta mono"><span class="date">24 JUN 2026</span><span class="sep">/</span><span class="flag">Turbin3 Builders &middot; Capstone</span></p>
           </header>
           <div class="entry__body">
-            <p>Give an AI agent its own keypair and it has no spend limit, no program allowlist and no human brake. One prompt injection empties the wallet. The existing answer runs the policy registry as centralized middleware, which means whoever holds code access can quietly raise a cap or delete a kill switch.</p>
+            <p>Give an AI agent its own keypair and it has no spend limit, no program allowlist and no human brake. One prompt injection empties the wallet. The closest existing product runs the policy registry as centralized middleware, which means whoever holds code access can quietly raise a cap or delete a kill switch. The control plane is exactly the thing that should be tamper-evident, and it is not.</p>
             <p>Cardon puts the control plane on chain. Every transaction the agent wants to broadcast is simulated, checked against a policy account, then signed, queued for a human, or rejected. Three account types: <span class="code">Agent</span> (signing key, policy link, enabled flag, pending nonce), <span class="code">Policy</span> (max lamports per transaction, human-in-the-loop threshold, daily volume ceiling, allowed programs), <span class="code">PendingTx</span> (created above the threshold, closed and rent-refunded on decision). Seven instructions, split between an authority-only path and the agent's fast path.</p>
-            <p>Around the program: a Rust SDK with an async client and a simulation hook, a TypeScript SDK, a SendAI Agent Kit adapter whose wallet enforces policy on every sign, Squads v4 governance so approvals route through a multisig proposal that CPIs <span class="code">approve_tx</span>, an event indexer that decodes emitted logs into an append-only audit store, a Helius webhook confirming the broadcast leg, and a Next.js approval queue.</p>
-            <ul class="chips"><li class="chip">Policy accounts on chain</li><li class="chip">Human-in-the-loop queue</li><li class="chip">Rust + TS SDKs</li><li class="chip">SendAI Agent Kit</li><li class="chip">Squads v4</li><li class="chip">Helius webhooks</li></ul>
-            <p class="idline mono"><span class="dim">DEVNET PROGRAM</span> <button class="copy" data-copy="5Zy73PLH2hpNvsCvyeqpn2tKjHBXNihjX7UbeAZ41tQc" title="Copy program ID">5Zy73PLH2hpNvsCvyeqpn2tKjHBXNihjX7UbeAZ41tQc</button></p>
-            <p class="links"><a href="https://github.com/Hijanhv/cardon" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://cardon-protocol.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a><a href="https://youtu.be/B8M58DLUgd8" target="_blank" rel="noopener">Pitch video &#8599;</a></p>
+            <p>Around the program: a Rust SDK with an async client and a simulation hook, a TypeScript SDK published as <span class="code">@cardon/sdk</span>, a SendAI Agent Kit adapter whose wallet enforces policy on every sign, Squads v4 governance so approvals route through a multisig proposal that CPIs <span class="code">approve_tx</span> with no program change, an event indexer that decodes emitted logs into an append-only audit store, a Helius webhook confirming the broadcast leg, and a Next.js approval queue.</p>
+            <ul class="chips"><li class="chip">On-chain policy</li><li class="chip">Human-in-the-loop queue</li><li class="chip">Two SDKs</li><li class="chip">Agent-kit adapter</li><li class="chip">Audit mirror</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust &middot; Anchor &middot; Cargo workspace &middot; TypeScript SDK &middot; SendAI Solana Agent Kit &middot; Squads v4 &middot; Helius RPC + webhooks &middot; Next.js &middot; Vercel</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet, full suite green against the cluster</dd></div>
+              <div><dt class="mono">Program</dt><dd><button class="copy" data-copy="5Zy73PLH2hpNvsCvyeqpn2tKjHBXNihjX7UbeAZ41tQc" title="Copy program ID">5Zy73PLH2hpNvsCvyeqpn2tKjHBXNihjX7UbeAZ41tQc</button></dd></div>
+            </dl>
+            <p class="links"><a href="https://github.com/Hijanhv/cardon" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://cardon-protocol.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a><a href="https://cardon-protocol.vercel.app/dashboard" target="_blank" rel="noopener">HITL dashboard &#8599;</a><a href="https://youtu.be/B8M58DLUgd8" target="_blank" rel="noopener">Pitch video &#8599;</a><a href="https://github.com/Hijanhv/cardon/blob/main/docs/CAPSTONE_PROPOSAL.md" target="_blank" rel="noopener">Capstone proposal &#8599;</a></p>
           </div>
         </div>
       </article>
@@ -246,9 +281,13 @@
           </header>
           <div class="entry__body">
             <p>An autonomous market-making agent for live football markets: match result, over/under 2.5, both teams to score. It does not forecast football. It quotes two sides, earns the spread on ordinary flow, and anchors fair value to TxLINE's de-margined consensus so the price only moves when the score or the clock moves.</p>
-            <p>The whole engineering problem is the goal. Fair value gaps the instant a ball crosses the line, and anyone reading the feed faster than you takes the stale quote. Catenaccio reprices in roughly 400ms off a verified event. Backtest runs positive on average at a Sharpe of 3.16, with 36 tests behind the engine.</p>
-            <p>On chain, it does two real things on devnet: it calls the Txoracle <span class="code">subscribe</span> instruction to unlock the live World Cup data tier, and it writes the decision log's 32-byte Merkle root through the SPL Memo program. That second one is the point. A trading track record nobody can audit is worth very little, so any fill can be checked against its TxLINE proof after the fact.</p>
-            <ul class="chips"><li class="chip">~400ms reprice</li><li class="chip">Merkle-anchored decision log</li><li class="chip">SPL Memo</li><li class="chip">Txoracle subscribe</li><li class="chip">36 tests</li></ul>
+            <p>The whole engineering problem is the goal. Fair value gaps the instant a ball crosses the line, and anyone reading the feed faster than you takes the stale quote. Catenaccio reprices in roughly 400ms off a verified event. The backtest runs positive on average at a Sharpe of 3.16, with 36 tests behind the engine.</p>
+            <p>On chain it does two real things on devnet: it calls the TxODDS Txoracle <span class="code">subscribe</span> instruction to unlock the live World Cup data tier, and it writes the decision log's 32-byte Merkle root through the SPL Memo program. That second one is the point. A trading track record nobody can audit is worth very little, so any fill can be checked against its TxLINE proof after the fact.</p>
+            <ul class="chips"><li class="chip">~400ms reprice</li><li class="chip">Merkle-anchored decision log</li><li class="chip">Latency-arb defence</li><li class="chip">36 tests</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>TypeScript (strict) &middot; Next.js 15 &middot; @solana/web3.js &middot; SPL Memo &middot; TxODDS Txoracle &middot; TxLINE SSE feed &middot; Vercel</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet, real subscribe and memo transactions</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/Catenaccio" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://catenaccio-six.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a><a href="https://youtu.be/_Xxgt5fyRn0" target="_blank" rel="noopener">Demo video &#8599;</a></p>
           </div>
         </div>
@@ -265,9 +304,13 @@
           <div class="entry__body">
             <p>An anticipation engine for football. It reads live odds and pitch events and lights up when on-pitch pressure surges while the betting market has not repriced yet. In the recorded walkthrough it flags a goal 207 seconds before the market moves. Watching costs nothing and needs no wallet.</p>
             <p>Then it lets a fan prove the call. "I called it" is worthless in a group chat because everyone remembers being right; a timestamped Solana memo written <em>before</em> the goal is not. First-time callers sign in with Solana: connect Phantom, Solflare or Backpack and sign a free Ed25519 ownership message. The signature is verified server-side with Node's built-in <span class="code">crypto</span>, wrapping the public key in an SPKI envelope, and nonces and sessions are stateless HMACs, so nothing has to be stored between requests and it survives serverless cold starts. No wallet-adapter stack at all. The server pays the memo fee, so the fan needs zero SOL for an attributed on-chain receipt.</p>
-            <p>Match stats carry a "Verified on Solana" badge backed by a live Merkle proof against TxLINE's anchored root, and unlocking the feed itself runs the on-chain Token-2022 <span class="code">subscribe</span> instruction. Everything runs against mainnet-beta, smoke-tested on the production URL on every change.</p>
-            <ul class="chips"><li class="chip">Sign-In-With-Solana</li><li class="chip">Mainnet memo receipts</li><li class="chip">Merkle stat proofs</li><li class="chip">Token-2022 subscribe</li><li class="chip">PWA</li></ul>
-            <p class="links"><a href="https://github.com/Hijanhv/FORESIGHT" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://foresight-psi-eight.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a><a href="https://youtu.be/ft3stLQtXUs" target="_blank" rel="noopener">Demo video &#8599;</a></p>
+            <p>Match stats carry a "Verified on Solana" badge backed by a live Merkle proof against TxLINE's anchored root, and unlocking the feed itself runs the on-chain Token-2022 <span class="code">subscribe</span> instruction. Everything runs against mainnet-beta and the sign-in handshake is smoke-tested against the production URL on every change.</p>
+            <ul class="chips"><li class="chip">Sign-In-With-Solana</li><li class="chip">Mainnet memo receipts</li><li class="chip">Merkle stat proofs</li><li class="chip">Mobile-first PWA</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Next.js &middot; TypeScript &middot; PWA &middot; @solana/web3.js &middot; @solana/spl-token (Token-2022) &middot; Node crypto (Ed25519) &middot; stateless HMAC sessions &middot; TxLINE SSE &middot; Vercel</dd></div>
+              <div><dt class="mono">Network</dt><dd>Solana mainnet-beta</dd></div>
+            </dl>
+            <p class="links"><a href="https://github.com/Hijanhv/FORESIGHT" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://foresight-psi-eight.vercel.app/" target="_blank" rel="noopener">Live app &#8599;</a><a href="https://youtu.be/ft3stLQtXUs" target="_blank" rel="noopener">Demo video &#8599;</a><a href="https://x.com/JanhaviChavada/status/2078805229458624926" target="_blank" rel="noopener">Launch thread &#8599;</a></p>
           </div>
         </div>
       </article>
@@ -280,7 +323,7 @@
     <div class="sect__head">
       <p class="mono label">SECTION 02</p>
       <h2>Turbin3 Builders cohort</h2>
-      <p class="sect__note">The assignment set, written from scratch. Every program has a test suite; most run on LiteSVM so the suite finishes in about the time it takes to compile.</p>
+      <p class="sect__note">The whole assignment set, written from scratch, plus every optional challenge. Most programs are tested on LiteSVM, so a suite runs in about the time it takes to compile rather than waiting on a validator. The capstone that came out of it is Cardon, above.</p>
     </div>
 
     <div class="entries">
@@ -291,11 +334,15 @@
           <header class="entry__head">
             <h3>Assignment 0</h3>
             <p class="entry__kicker">Toolchain, keypair, and the first Anchor scaffold.</p>
-            <p class="entry__meta mono"><span class="date">26 APR 2026</span><span class="sep">/</span><span>Rust 1.95 &middot; Solana CLI 3.1.14 &middot; Anchor 1.0.1 &middot; Surfpool 1.2.0</span></p>
+            <p class="entry__meta mono"><span class="date">26 APR 2026</span></p>
           </header>
           <div class="entry__body">
             <p>The setup assignment, documented so it is reproducible rather than remembered: install Rust, the Agave CLI, Anchor through avm and Surfpool, generate a keypair, point at devnet, airdrop, then scaffold and build. The scaffold is split into <span class="code">constants</span>, <span class="code">error</span>, <span class="code">state</span> and <span class="code">instructions</span> modules from the first commit, which is the layout every later assignment reuses.</p>
-            <ul class="chips"><li class="chip">avm</li><li class="chip">Surfpool</li><li class="chip">Devnet</li><li class="chip">Rust test harness</li></ul>
+            <ul class="chips"><li class="chip">avm</li><li class="chip">Surfpool</li><li class="chip">Rust test harness</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust 1.95 &middot; Solana CLI 3.1.14 (Agave) &middot; Anchor CLI 1.0.1 &middot; Surfpool 1.2.0 &middot; TypeScript</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/turbine3-hw" target="_blank" rel="noopener">Repository &#8599;</a></p>
           </div>
         </div>
@@ -307,15 +354,19 @@
           <header class="entry__head">
             <h3>SPL Token &amp; MPL Core NFT</h3>
             <p class="entry__kicker">Mint, metadata, transfer, and an NFT with a royalties plugin.</p>
-            <p class="entry__meta mono"><span class="date">11 MAY 2026</span><span class="sep">/</span><span>spl-token &middot; Metaplex Core &middot; Irys</span></p>
+            <p class="entry__meta mono"><span class="date">11 MAY 2026</span></p>
           </header>
           <div class="entry__body">
             <p>Scripts that take an SPL token from nothing to a completed transfer on devnet: create the mint, attach name, symbol and URI, create the associated token account, mint into it, send some to another wallet. Janhavi Token (JNV), six decimals.</p>
             <p>The NFT half uploads image and metadata to Irys, then mints a Metaplex Core asset with the <span class="code">Royalties</span> plugin attached at creation time, 500 basis points, ruleSet <span class="code">None</span>. An earlier pass minted without the plugin, which is worth knowing: on Core you attach plugins at creation, so a missing one means minting again.</p>
-            <ul class="chips"><li class="chip">SPL mint + ATA</li><li class="chip">Token metadata</li><li class="chip">MPL Core</li><li class="chip">Royalties plugin</li><li class="chip">Irys uploads</li></ul>
-            <p class="idline mono"><span class="dim">DEVNET MINT</span> <button class="copy" data-copy="5dxYuJqWd9qPxPRrLfXJ746w8LH1xPR6S41dRNzDq48o" title="Copy mint address">5dxYuJqWd9qPxPRrLfXJ746w8LH1xPR6S41dRNzDq48o</button></p>
-            <p class="idline mono"><span class="dim">CORE ASSET</span> <button class="copy" data-copy="6L6G1swRPk65uT1521cGLW59x9N5Y3DzKa7Dj3iqgNsR" title="Copy asset address">6L6G1swRPk65uT1521cGLW59x9N5Y3DzKa7Dj3iqgNsR</button></p>
-            <p class="links"><a href="https://github.com/Hijanhv/SPL-NFT---ASSIGNMENT2" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://core.metaplex.com/explorer/6L6G1swRPk65uT1521cGLW59x9N5Y3DzKa7Dj3iqgNsR?env=devnet" target="_blank" rel="noopener">Core explorer &#8599;</a></p>
+            <ul class="chips"><li class="chip">SPL mint + ATA</li><li class="chip">Token metadata</li><li class="chip">Core plugins</li><li class="chip">Irys uploads</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>TypeScript &middot; @solana/web3.js &middot; @solana/spl-token &middot; Metaplex Umi &middot; mpl-core &middot; mpl-token-metadata &middot; Irys</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet</dd></div>
+              <div><dt class="mono">Mint</dt><dd><button class="copy" data-copy="5dxYuJqWd9qPxPRrLfXJ746w8LH1xPR6S41dRNzDq48o" title="Copy mint address">5dxYuJqWd9qPxPRrLfXJ746w8LH1xPR6S41dRNzDq48o</button></dd></div>
+              <div><dt class="mono">Core asset</dt><dd><button class="copy" data-copy="6L6G1swRPk65uT1521cGLW59x9N5Y3DzKa7Dj3iqgNsR" title="Copy asset address">6L6G1swRPk65uT1521cGLW59x9N5Y3DzKa7Dj3iqgNsR</button></dd></div>
+            </dl>
+            <p class="links"><a href="https://github.com/Hijanhv/SPL-NFT---ASSIGNMENT2" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://core.metaplex.com/explorer/6L6G1swRPk65uT1521cGLW59x9N5Y3DzKa7Dj3iqgNsR?env=devnet" target="_blank" rel="noopener">Core explorer &#8599;</a><a href="https://explorer.solana.com/address/5dxYuJqWd9qPxPRrLfXJ746w8LH1xPR6S41dRNzDq48o?cluster=devnet" target="_blank" rel="noopener">Mint on explorer &#8599;</a></p>
           </div>
         </div>
       </article>
@@ -326,12 +377,17 @@
           <header class="entry__head">
             <h3>Anchor Vault</h3>
             <p class="entry__kicker">A personal SOL vault, and the PDA signing trick behind it.</p>
-            <p class="entry__meta mono"><span class="date">17 MAY 2026</span><span class="sep">/</span><span>Anchor &middot; LiteSVM &middot; Rust tests</span></p>
+            <p class="entry__meta mono"><span class="date">17 MAY 2026</span><span class="sep">/</span><span>Week 3</span></p>
           </header>
           <div class="entry__body">
             <p>Two PDAs per user. A <span class="code">state</span> account at <span class="code">[b"state", user]</span> owned by the program, holding nothing but the two bumps, so the program never pays for <span class="code">find_program_address</span> on chain again. A <span class="code">vault</span> at <span class="code">[b"vault", state]</span> owned by the <em>System Program</em>, not by us.</p>
             <p>That ownership choice is the whole design. Because the vault is a plain System account, the System Program is happy to move lamports in and out of it, so deposits are an ordinary transfer the user signs, and withdrawals are a CPI where the vault PDA signs for itself using its bump seeds. Four instructions: initialize, deposit, withdraw, close, with close draining the vault and refunding the state account's rent.</p>
-            <ul class="chips"><li class="chip">Signer seeds</li><li class="chip">System Program CPI</li><li class="chip">Bump caching</li><li class="chip">Rent refunds</li><li class="chip">LiteSVM</li></ul>
+            <p>The README is written as a walkthrough rather than a summary, so someone new to Anchor can read the program top to bottom and understand why each constraint is there.</p>
+            <ul class="chips"><li class="chip">Signer seeds</li><li class="chip">System Program CPI</li><li class="chip">Bump caching</li><li class="chip">Rent refunds</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust &middot; Anchor &middot; LiteSVM &middot; Rust integration tests</dd></div>
+              <div><dt class="mono">Network</dt><dd>LiteSVM (in-process), devnet-ready</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/anchor_vault" target="_blank" rel="noopener">Repository &#8599;</a></p>
           </div>
         </div>
@@ -343,13 +399,17 @@
           <header class="entry__head">
             <h3>Anchor Escrow</h3>
             <p class="entry__kicker">Two-party SPL swap with a program-owned vault.</p>
-            <p class="entry__meta mono"><span class="date">17 MAY 2026</span><span class="sep">/</span><span>Anchor 1.0 &middot; token_interface &middot; 8 LiteSVM tests</span></p>
+            <p class="entry__meta mono"><span class="date">17 MAY 2026</span><span class="sep">/</span><span>Assignment 2</span></p>
           </header>
           <div class="entry__body">
             <p>A maker locks a deposit of mint A into a vault owned by the escrow PDA and names a price in mint B. A taker who pays that price takes mint A and both accounts close back to the maker; if nobody takes it, the maker refunds. Three instructions, no trusted middle.</p>
-            <p>The escrow PDA is derived from <span class="code">[b"escrow", maker, seed]</span>, so one maker can run many escrows at once by varying the seed, which the test suite exercises directly. Token movement goes through Anchor's <span class="code">token_interface</span>, so classic SPL Token and Token-2022 mints both work as long as each mint stays on one token program. Tests cover the happy paths plus zero deposit, zero receive, an underfunded taker and a refund signed by someone other than the maker.</p>
+            <p>The escrow PDA is derived from <span class="code">[b"escrow", maker, seed]</span>, so one maker can run many escrows at once by varying the seed, which the test suite exercises directly. Token movement goes through Anchor's <span class="code">token_interface</span>, so classic SPL Token and Token-2022 mints both work as long as each mint stays on one token program. Eight tests cover the happy paths plus zero deposit, zero receive, an underfunded taker, and a refund signed by someone other than the maker.</p>
             <ul class="chips"><li class="chip">Escrow PDA + vault ATA</li><li class="chip">Token-2022 ready</li><li class="chip">Account closing</li><li class="chip">Negative tests</li></ul>
-            <p class="idline mono"><span class="dim">PROGRAM</span> <button class="copy" data-copy="C2oi9cyMqb3VkRFJTxV7ePsViZBhPY7vhPLxZ6uNyPjK" title="Copy program ID">C2oi9cyMqb3VkRFJTxV7ePsViZBhPY7vhPLxZ6uNyPjK</button></p>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust 1.89 &middot; anchor-lang / anchor-spl 1.0 &middot; solana-sdk 3.x &middot; LiteSVM 0.12 &middot; spl-token 9 &middot; spl-associated-token-account 8</dd></div>
+              <div><dt class="mono">Network</dt><dd>LiteSVM (in-process)</dd></div>
+              <div><dt class="mono">Program</dt><dd><button class="copy" data-copy="C2oi9cyMqb3VkRFJTxV7ePsViZBhPY7vhPLxZ6uNyPjK" title="Copy program ID">C2oi9cyMqb3VkRFJTxV7ePsViZBhPY7vhPLxZ6uNyPjK</button></dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/Anchor-Escrow" target="_blank" rel="noopener">Repository &#8599;</a></p>
           </div>
         </div>
@@ -361,13 +421,17 @@
           <header class="entry__head">
             <h3>Constant-product AMM</h3>
             <p class="entry__kicker">Pool, LP mint, swap curve, and an authority kill switch.</p>
-            <p class="entry__meta mono"><span class="date">22 MAY 2026</span><span class="sep">/</span><span>Anchor 0.32.1 &middot; devnet &middot; Next.js 16</span></p>
+            <p class="entry__meta mono"><span class="date">22 MAY 2026</span><span class="sep">/</span><span>Assignment 1</span></p>
           </header>
           <div class="entry__body">
             <p>Anyone can open an (A, B) pool with a fee in basis points, deposit reserves for LP tokens, swap at the curve price and withdraw pro rata. First deposit mints <span class="code">sqrt(a * b)</span> LP; later deposits mint proportionally to the share of reserves added. Every mutating instruction takes a slippage bound, and an optional pool authority can lock the pool, which blocks deposit, withdraw and swap in one flag.</p>
-            <p>The curve keeps the fee inside the invariant: <span class="code">amount_out = (in_with_fee * rB) / (rA * FEE_DENOM + in_with_fee)</span>, so <span class="code">k</span> is preserved modulo the fee and the fee accrues to LPs. The math lives in its own module with unit tests separate from the integration suite. Config holds both mints, the fee, the optional authority, the lock flag and both bumps.</p>
-            <ul class="chips"><li class="chip">x*y=k with fees</li><li class="chip">LP mint PDA</li><li class="chip">Slippage floors</li><li class="chip">Checked math</li><li class="chip">Curve unit tests</li></ul>
-            <p class="idline mono"><span class="dim">DEVNET PROGRAM</span> <button class="copy" data-copy="4DmfmgZHzg7aTC11qaZGc7WsbiA7hjtgLU4TpePrSB3v" title="Copy program ID">4DmfmgZHzg7aTC11qaZGc7WsbiA7hjtgLU4TpePrSB3v</button></p>
+            <p>The curve keeps the fee inside the invariant: <span class="code">amount_out = (in_with_fee * rB) / (rA * FEE_DENOM + in_with_fee)</span>, so <span class="code">k</span> is preserved modulo the fee and the fee accrues to LPs. The math lives in its own module with unit tests separate from the integration suite. Config holds both mints, the fee, the optional authority, the lock flag and both bumps, so no instruction recomputes a derivation it could have stored. Custom errors cover locked pools, invalid fees, zero amounts, slippage, overflow, empty reserves, unauthorized callers and identical mints.</p>
+            <ul class="chips"><li class="chip">x&middot;y=k with fees</li><li class="chip">LP mint PDA</li><li class="chip">Slippage floors</li><li class="chip">Checked math</li><li class="chip">Curve unit tests</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust &middot; Anchor 0.32.1 &middot; anchor-spl &middot; TypeScript integration tests &middot; Next.js 16 frontend &middot; Vercel</dd></div>
+              <div><dt class="mono">Network</dt><dd>Devnet</dd></div>
+              <div><dt class="mono">Program</dt><dd><button class="copy" data-copy="4DmfmgZHzg7aTC11qaZGc7WsbiA7hjtgLU4TpePrSB3v" title="Copy program ID">4DmfmgZHzg7aTC11qaZGc7WsbiA7hjtgLU4TpePrSB3v</button></dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/AMM-Turbine3" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://amm-solana.vercel.app" target="_blank" rel="noopener">Live app &#8599;</a><a href="https://explorer.solana.com/address/4DmfmgZHzg7aTC11qaZGc7WsbiA7hjtgLU4TpePrSB3v?cluster=devnet" target="_blank" rel="noopener">Explorer &#8599;</a></p>
           </div>
         </div>
@@ -379,12 +443,16 @@
           <header class="entry__head">
             <h3>NFT Staking</h3>
             <p class="entry__kicker">Freeze a Core asset in place, accrue points, mint them as tokens.</p>
-            <p class="entry__meta mono"><span class="date">31 MAY 2026</span><span class="sep">/</span><span>Metaplex Core &middot; Anchor 0.32.1 &middot; both bonus challenges</span></p>
+            <p class="entry__meta mono"><span class="date">31 MAY 2026</span><span class="sep">/</span><span>Week 5, both bonus challenges</span></p>
           </header>
           <div class="entry__body">
             <p>Staking adds a <span class="code">FreezeDelegate</span> plugin to the asset with <span class="code">frozen = true</span> and delegates thaw rights to the asset's stake PDA, so the owner cannot move it but the program can release it later. Points accrue per second per staked asset. Claiming is its own instruction, so a holder can take rewards without unstaking, and both claim and unstake settle everything earned since the last settlement, meaning nothing is lost by claiming late. The collection carries an Attributes plugin the program updates on every stake and unstake, giving a live staked count on chain.</p>
-            <p>No published <span class="code">mpl-core</span> crate lines up with Anchor 0.32.1 and Solana 3.1.x: older versions pin Solana 1.x, newer ones pull Solana 4.x types, and neither unifies with Anchor's account types. Rather than downgrade the whole toolchain, the program rebuilds the five Core instructions it needs from their Borsh layouts and discriminators and invokes them directly, so the on-chain crate depends only on anchor-lang and anchor-spl.</p>
-            <ul class="chips"><li class="chip">FreezeDelegate plugin</li><li class="chip">Hand-built Core CPI</li><li class="chip">Attributes plugin counter</li><li class="chip">Reward mint</li><li class="chip">Borsh discriminators</li></ul>
+            <p>No published <span class="code">mpl-core</span> crate lines up with Anchor 0.32.1 and Solana 3.1.x: older versions pin Solana 1.x, newer ones pull Solana 4.x types, and neither unifies with Anchor's account types. Rather than downgrade the whole toolchain, the program rebuilds the five Core instructions it needs from their Borsh layouts and discriminators and invokes them with <span class="code">invoke</span> and <span class="code">invoke_signed</span>, so the on-chain crate depends only on anchor-lang and anchor-spl.</p>
+            <ul class="chips"><li class="chip">FreezeDelegate plugin</li><li class="chip">Hand-built Core CPI</li><li class="chip">Attributes counter</li><li class="chip">Reward mint</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust &middot; Anchor 0.32.1 &middot; anchor-spl &middot; Metaplex Core (raw Borsh CPI) &middot; TypeScript tests &middot; local validator with the Core program dumped as a fixture</dd></div>
+              <div><dt class="mono">Network</dt><dd>Local validator</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/NFT-Staking" target="_blank" rel="noopener">Repository &#8599;</a></p>
           </div>
         </div>
@@ -396,12 +464,16 @@
           <header class="entry__head">
             <h3>NFT Marketplace</h3>
             <p class="entry__kicker">Listings priced in SOL or any SPL token, plus a bidding flow.</p>
-            <p class="entry__meta mono"><span class="date">31 MAY 2026</span><span class="sep">/</span><span>Metaplex Core &middot; 9 tests &middot; all three challenges</span></p>
+            <p class="entry__meta mono"><span class="date">31 MAY 2026</span><span class="sep">/</span><span>Week 5 A2, all three challenges</span></p>
           </header>
           <div class="entry__body">
             <p>Listing transfers the Core asset to the listing PDA itself, so the PDA is the escrow and there is no separate vault account to reconcile. <span class="code">Listing.payment_mint: Option&lt;Pubkey&gt;</span> denominates the sale: <span class="code">None</span> means SOL, <span class="code">Some(mint)</span> means an SPL token settled through <span class="code">transfer_checked</span>, with mints handled as <span class="code">InterfaceAccount</span> throughout so it is Token-2022 ready.</p>
-            <p>Buyers who do not want the ask can open an <span class="code">Offer</span> PDA at <span class="code">["offer", asset, buyer]</span> that escrows their lamports until the maker accepts, or they cancel. Fees come out of the seller's proceeds rather than being added to the buyer's price, so the buyer always pays exactly the listed number. Every completed sale also mints reward tokens to the buyer from a marketplace-owned mint.</p>
+            <p>Buyers who do not want the ask can open an <span class="code">Offer</span> PDA at <span class="code">["offer", asset, buyer]</span> that escrows their lamports until the maker accepts, or they cancel. Fees come out of the seller's proceeds rather than being added to the buyer's price, so the buyer always pays exactly the listed number. Every completed sale also mints reward tokens to the buyer from a marketplace-owned mint. Nine tests, all passing.</p>
             <ul class="chips"><li class="chip">PDA-as-escrow</li><li class="chip">SOL + SPL pricing</li><li class="chip">Offer / accept / cancel</li><li class="chip">Treasury fee split</li><li class="chip">Buyer rewards</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust &middot; Anchor &middot; anchor-spl token_interface &middot; Metaplex Core &middot; TypeScript tests</dd></div>
+              <div><dt class="mono">Network</dt><dd>Local validator</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/NFT-Marketplace" target="_blank" rel="noopener">Repository &#8599;</a></p>
           </div>
         </div>
@@ -413,12 +485,16 @@
           <header class="entry__head">
             <h3>Instruction Introspection</h3>
             <p class="entry__kicker">Proving a sibling instruction really happened.</p>
-            <p class="entry__meta mono"><span class="date">04 JUN 2026</span><span class="sep">/</span><span>Instructions sysvar &middot; two workspaces &middot; 13 tests</span></p>
+            <p class="entry__meta mono"><span class="date">04 JUN 2026</span><span class="sep">/</span><span>Week 6, both challenge options</span></p>
           </header>
           <div class="entry__body">
             <p>Introspection is how a program stops trusting what was passed in and starts reading what actually happened in the same atomic transaction. Both challenge options are implemented as separate Anchor workspaces. <strong>dice-bet</strong> verifies a sibling <span class="code">commit_result</span> instruction carrying a custom Borsh struct signed by the house, instead of leaning on an Ed25519 signature instruction. <strong>burn-amm</strong> is an AMM that pays out only if an SPL Token <span class="code">Burn</span> immediately precedes the payout instruction.</p>
-            <p>Both use the same pattern: <span class="code">load_current_index_checked</span> to find yourself, <span class="code">load_instruction_at_checked</span> to fetch the neighbour, then check its program ID, its discriminator and payload, its account metas and which of those accounts signed, before acting.</p>
-            <ul class="chips"><li class="chip">Instructions sysvar</li><li class="chip">Borsh payload checks</li><li class="chip">Account meta + signer checks</li><li class="chip">Burn verification</li></ul>
+            <p>Both use the same pattern: <span class="code">load_current_index_checked</span> to find yourself, <span class="code">load_instruction_at_checked</span> to fetch the neighbour, then check its program ID, its discriminator and payload, its account metas and which of those accounts signed, before acting. Thirteen tests across the two programs.</p>
+            <ul class="chips"><li class="chip">Instructions sysvar</li><li class="chip">Borsh payload checks</li><li class="chip">Signer verification</li><li class="chip">Burn verification</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Rust 1.95 &middot; Anchor 0.32.1 &middot; Solana CLI 3.1.x (Agave) &middot; TypeScript tests &middot; Yarn</dd></div>
+              <div><dt class="mono">Network</dt><dd>Local validator</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/Instruction-Introspection" target="_blank" rel="noopener">Repository &#8599;</a></p>
           </div>
         </div>
@@ -428,15 +504,19 @@
         <div class="entry__idx"><span class="mono">19</span></div>
         <div class="entry__main">
           <header class="entry__head">
-            <h3>Capstone: user stories &amp; on-chain requirements</h3>
-            <p class="entry__kicker">Turning a protocol idea into account-level requirements.</p>
-            <p class="entry__meta mono"><span class="date">23 MAY 2026</span><span class="sep">/</span><span>Capstone Assignment 2</span></p>
+            <h3>Capstone A1: proposal &amp; research</h3>
+            <p class="entry__kicker">Picking the problem, then proving somebody has it.</p>
+            <p class="entry__meta mono"><span class="date">20 MAY 2026</span><span class="sep">/</span><span>Capstone Assignment 1</span></p>
           </header>
           <div class="entry__body">
-            <p>Four personas, a function map of single-action functions per persona, the two critical interaction paths the proof of concept has to prove (auto-approval and human-in-the-loop), then 24 atomic user stories with stable numbering so the requirements can cite back to them. Each story is followed by the on-chain requirements it implies, organized around the <span class="code">Policy</span> and <span class="code">Intent</span> accounts.</p>
-            <p>A second part logs the process honestly: every prompt used, what I agreed with, what I overrode and why, and a before-and-after refinement log for the atomicity pass. Built to PDF through pandoc and headless Chrome, so there is no LaTeX dependency to break.</p>
-            <ul class="chips"><li class="chip">Personas</li><li class="chip">Atomic user stories</li><li class="chip">Account requirements</li><li class="chip">Pandoc build</li></ul>
-            <p class="links"><a href="https://github.com/Hijanhv/capstone-user-stories-onchain" target="_blank" rel="noopener">Repository &#8599;</a></p>
+            <p>The capstone proposal that became Cardon, submitted under the working name Sentry: value proposition, market analysis, competitive read on the existing centralized-middleware answer, and the build plan splitting an Anchor policy registry from a Rust SDK middleware layer and a Next.js human-in-the-loop dashboard.</p>
+            <p>The research is primary-source rather than summarized: raw scrapes of the protocols and products being compared are checked in alongside the argument, so a claim in the proposal can be traced to what it was drawn from. The deliverable ships as a PDF, and the finished proposal lives in the Cardon repository so it stays next to the code it specified.</p>
+            <ul class="chips"><li class="chip">Value proposition</li><li class="chip">Market analysis</li><li class="chip">Primary sources</li><li class="chip">Build plan</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Markdown &middot; pandoc &middot; PDF deliverable &middot; checked-in source scrapes</dd></div>
+              <div><dt class="mono">Note</dt><dd>The research working repo is private; the finished proposal is public in the Cardon repo</dd></div>
+            </dl>
+            <p class="links"><a href="https://github.com/Hijanhv/cardon/blob/main/docs/CAPSTONE_PROPOSAL.md" target="_blank" rel="noopener">Read the proposal &#8599;</a><a href="https://github.com/Hijanhv/cardon" target="_blank" rel="noopener">Cardon repository &#8599;</a></p>
           </div>
         </div>
       </article>
@@ -445,15 +525,18 @@
         <div class="entry__idx"><span class="mono">20</span></div>
         <div class="entry__main">
           <header class="entry__head">
-            <h3>Raydium architecture study</h3>
-            <p class="entry__kicker">Reading someone else's protocol until you can draw it.</p>
-            <p class="entry__meta mono"><span class="date">05 JUN 2026</span><span class="sep">/</span><span>14 Mermaid diagrams &middot; draw.io &middot; PlantUML</span></p>
+            <h3>Capstone A2: user stories &amp; on-chain requirements</h3>
+            <p class="entry__kicker">Turning a protocol idea into account-level requirements.</p>
+            <p class="entry__meta mono"><span class="date">23 MAY 2026</span><span class="sep">/</span><span>Capstone Assignment 2</span></p>
           </header>
           <div class="entry__body">
-            <p>A full architecture teardown of Raydium: program structure and responsibilities, a CPI interaction matrix, account and PDA maps for CPMM, CLMM and AMM v4 with OpenBook, the PDA derivation pipeline, and swap and routing decision flows with error paths. One legend, consistent labeling, and PNG and SVG exports of every diagram so none of it needs tooling to read.</p>
-            <p>Delivered across four formats: Mermaid for the inline GitHub document, an importable draw.io canvas, and PlantUML for the component and sequence diagrams.</p>
-            <ul class="chips"><li class="chip">CPMM / CLMM / AMM v4</li><li class="chip">PDA maps</li><li class="chip">CPI matrix</li><li class="chip">Mermaid + PlantUML</li></ul>
-            <p class="links"><a href="https://github.com/Hijanhv/raydium--Architecture-Design-" target="_blank" rel="noopener">Repository &#8599;</a></p>
+            <p>Four personas, a function map of single-action functions per persona, the two critical interaction paths the proof of concept has to prove (auto-approval and human-in-the-loop), then 24 atomic user stories with stable numbering so the requirements can cite back to them. Each story is followed by the on-chain requirements it implies, organized around the <span class="code">Policy</span> and <span class="code">Intent</span> accounts, and it closes with the open questions handed forward to the architecture assignment.</p>
+            <p>A second part logs the process honestly: every prompt used, what I agreed with, what I overrode and why, and a before-and-after refinement log for the atomicity pass. Built to PDF through pandoc and headless Chrome, so there is no LaTeX dependency to break.</p>
+            <ul class="chips"><li class="chip">Personas</li><li class="chip">24 atomic stories</li><li class="chip">Account requirements</li><li class="chip">Process appendix</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Markdown &middot; pandoc &middot; headless Chrome &middot; shell build script</dd></div>
+            </dl>
+            <p class="links"><a href="https://github.com/Hijanhv/capstone-user-stories-onchain" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://github.com/Hijanhv/capstone-user-stories-onchain/raw/main/dist/cordon-user-stories.pdf" target="_blank" rel="noopener">Submission PDF &#8599;</a></p>
           </div>
         </div>
       </article>
@@ -462,13 +545,36 @@
         <div class="entry__idx"><span class="mono">21</span></div>
         <div class="entry__main">
           <header class="entry__head">
-            <h3>Cardon architecture design</h3>
-            <p class="entry__kicker">The same teardown treatment, applied to my own protocol.</p>
-            <p class="entry__meta mono"><span class="date">06 JUN 2026</span><span class="sep">/</span><span>Mermaid &middot; account &amp; PDA mapping</span></p>
+            <h3>Raydium architecture study</h3>
+            <p class="entry__kicker">Reading someone else's protocol until you can draw it.</p>
+            <p class="entry__meta mono"><span class="date">05 JUN 2026</span></p>
           </header>
           <div class="entry__body">
-            <p>Cardon documented to the same construction guide as the Raydium study: the problem, the account and PDA map, external dependencies, the decision flow through simulate, policy check and either auto-approve, queue or reject, and the trust boundary between the agent, the SDK and the program. Useful because it forced the protocol's ambiguities into the open before the program was finished.</p>
-            <ul class="chips"><li class="chip">Decision flow diagrams</li><li class="chip">Account mapping</li><li class="chip">Trust boundaries</li></ul>
+            <p>A full architecture teardown of Raydium: program structure and responsibilities, a CPI interaction matrix, account and PDA maps for CPMM, CLMM and AMM v4 with OpenBook, the PDA derivation pipeline, and swap and routing decision flows with error paths. Fourteen diagrams under one legend with consistent labeling, plus PNG and SVG exports of every one so none of it needs tooling to read.</p>
+            <p>Delivered across four of the five recommended formats: Mermaid for the inline GitHub document, an importable draw.io canvas that also opens in Lucidchart, and PlantUML for the component diagram and the CPMM swap CPI sequence.</p>
+            <ul class="chips"><li class="chip">CPMM / CLMM / AMM v4</li><li class="chip">PDA maps</li><li class="chip">CPI matrix</li><li class="chip">Sequence diagrams</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Mermaid.js &middot; draw.io / Lucidchart &middot; PlantUML &middot; PNG + SVG exports</dd></div>
+            </dl>
+            <p class="links"><a href="https://github.com/Hijanhv/raydium--Architecture-Design-" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://github.com/Hijanhv/raydium--Architecture-Design-/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener">Read the diagrams &#8599;</a></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry" data-tags="turbin3 docs">
+        <div class="entry__idx"><span class="mono">22</span></div>
+        <div class="entry__main">
+          <header class="entry__head">
+            <h3>Cardon architecture design</h3>
+            <p class="entry__kicker">The same teardown treatment, applied to my own protocol.</p>
+            <p class="entry__meta mono"><span class="date">06 JUN 2026</span></p>
+          </header>
+          <div class="entry__body">
+            <p>Cardon documented to the same construction guide as the Raydium study: the problem statement, the account and PDA map, external dependencies, the decision flow through simulate, policy check and either auto-approve, queue or reject, and the trust boundary between the agent, the SDK and the program. Useful because it forced the protocol's ambiguities into the open before the program was finished.</p>
+            <ul class="chips"><li class="chip">Decision flow</li><li class="chip">Account mapping</li><li class="chip">Trust boundaries</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Mermaid.js &middot; rendered PNG exports</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/cardon--Architecture-Design-" target="_blank" rel="noopener">Repository &#8599;</a></p>
           </div>
         </div>
@@ -488,35 +594,62 @@
     <div class="entries">
 
       <article class="entry" data-tags="docs app">
-        <div class="entry__idx"><span class="mono">22</span></div>
+        <div class="entry__idx"><span class="mono">23</span></div>
         <div class="entry__main">
           <header class="entry__head">
             <h3>Solana Basics</h3>
             <p class="entry__kicker">Thirty lessons that are also a slide deck.</p>
-            <p class="entry__meta mono"><span class="date">30 AUG 2026</span><span class="sep">/</span><span>137 slides &middot; 22 diagrams &middot; static export</span></p>
+            <p class="entry__meta mono"><span class="date">30 AUG 2026</span></p>
           </header>
           <div class="entry__body">
-            <p>A black-and-white teaching deck taking a developer from no Solana knowledge to reading the official docs unaided. Most material teaches syntax before it dislodges the model the reader arrived with, so this one goes the other way: six lessons of unlearning (the code and state split, declared accounts, signers, fees versus gas) before a line of Rust appears. Then the network underneath, the core concepts from accounts through CPI, and a SOL transfer traced end to end.</p>
-            <p>Every lesson is a readable article and a presentable deck at the same time, with a present mode, arrow-key navigation and speaker cues written to be said out loud rather than read. Lessons are typed data objects rather than markup, which is what keeps thirty of them consistent and renderable in both views.</p>
-            <ul class="chips"><li class="chip">30 lessons</li><li class="chip">Present mode</li><li class="chip">Typed content blocks</li><li class="chip">Static export</li><li class="chip">DevRel</li></ul>
+            <p>A black-and-white teaching deck taking a developer from no Solana knowledge to reading the official docs unaided. Most material teaches syntax before it dislodges the model the reader arrived with, so this one goes the other way: six lessons of unlearning (the code and state split, declared accounts, signers, fees versus gas) before a line of Rust appears. Then the network underneath, the core concepts from accounts through CPI, a SOL transfer traced end to end, and a reference part with every runtime constant and a vocabulary table that has an Ethereum column.</p>
+            <p>Every lesson is a readable article and a presentable deck at the same time, with a present mode, arrow-key navigation and speaker cues written to be said out loud rather than read. Lessons are typed data objects rather than markup, which is what keeps thirty of them consistent and renderable in both views. 137 slides, 22 purpose-drawn diagrams, roughly four hours of teaching material.</p>
+            <ul class="chips"><li class="chip">30 lessons</li><li class="chip">Present mode</li><li class="chip">Typed content blocks</li><li class="chip">DevRel</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Next.js &middot; TypeScript &middot; static export &middot; no environment variables, no external services</dd></div>
+              <div><dt class="mono">Source</dt><dd>Derived from the official core docs at solana.com/docs/core</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/solana-basics-" target="_blank" rel="noopener">Repository &#8599;</a></p>
           </div>
         </div>
       </article>
 
       <article class="entry" data-tags="docs">
-        <div class="entry__idx"><span class="mono">23</span></div>
+        <div class="entry__idx"><span class="mono">24</span></div>
         <div class="entry__main">
           <header class="entry__head">
             <h3>Solscan Enhanced</h3>
             <p class="entry__kicker">A product teardown of the explorer everyone uses.</p>
-            <p class="entry__meta mono"><span class="date">02 MAY 2025</span><span class="sep">/</span><span>Design spec</span></p>
+            <p class="entry__meta mono"><span class="date">02 MAY 2025</span></p>
           </header>
           <div class="entry__body">
             <p>A written critique of where Solscan falls short and what a replacement would do instead: a wallet dashboard with portfolio breakdown and time-series activity, auto-labeling of wallets by behaviour, watchlists with alerts on large transfers and program interactions, a whale mirror that replays a wallet's past strategy against your own balance, an instruction decoder that renders raw calls in English, an in-browser Anchor IDL decoder and RPC tester, and behavioural risk profiling.</p>
-            <p>It is a spec, not a shipped app, and it is here because it is where a lot of the later work started: most of these ideas turned into things I actually built later.</p>
+            <p>It is a specification, not a shipped app, and it is here because it is where a lot of the later work started: the instruction decoding, the wallet labeling and the policy thinking all resurfaced in Cardon.</p>
             <ul class="chips"><li class="chip">Explorer UX</li><li class="chip">Instruction decoding</li><li class="chip">IDL tooling</li><li class="chip">Risk profiling</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>Design specification &middot; proposed Tailwind + shadcn/ui build</dd></div>
+            </dl>
             <p class="links"><a href="https://github.com/Hijanhv/solscan-enhanced" target="_blank" rel="noopener">Repository &#8599;</a></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry" data-tags="docs app">
+        <div class="entry__idx"><span class="mono">25</span></div>
+        <div class="entry__main">
+          <header class="entry__head">
+            <h3>This page</h3>
+            <p class="entry__kicker">The index you are reading.</p>
+            <p class="entry__meta mono"><span class="date">10 SEP 2026</span></p>
+          </header>
+          <div class="entry__body">
+            <p>Twenty-five builds gathered into one auditable index, because a scattered repository list is not a portfolio. Every entry carries the stack, the repository, the deployed link where one exists, and the design decision behind the build, so somebody can check the claim rather than take it. Program IDs are click-to-copy and link out to the explorer.</p>
+            <p>Static HTML, CSS and JavaScript with no build step and no dependencies, served by GitHub Pages straight from the repository root. Filtering, scroll reveal and copy-to-clipboard are about a hundred lines of vanilla JavaScript, and the page degrades to readable text without any of it.</p>
+            <ul class="chips"><li class="chip">No build step</li><li class="chip">Static hosting</li><li class="chip">Filterable index</li><li class="chip">Click-to-copy IDs</li></ul>
+            <dl class="spec">
+              <div><dt class="mono">Stack</dt><dd>HTML &middot; CSS custom properties &middot; vanilla JavaScript &middot; IntersectionObserver &middot; Instrument Serif / Archivo / JetBrains Mono &middot; GitHub Pages</dd></div>
+            </dl>
+            <p class="links"><a href="https://github.com/Hijanhv/pow-solana-janhavichavada" target="_blank" rel="noopener">Repository &#8599;</a><a href="https://hijanhv.github.io/pow-solana-janhavichavada/" target="_blank" rel="noopener">Live page &#8599;</a></p>
           </div>
         </div>
       </article>
@@ -529,7 +662,7 @@
     <div class="sect__head">
       <p class="mono label">SECTION 04</p>
       <h2>The ledger</h2>
-      <p class="sect__note">Twenty-one months, in order.</p>
+      <p class="sect__note">Twenty-two months, in order.</p>
     </div>
 
     <ol class="ledger">
@@ -544,15 +677,18 @@
       <li><span class="mono ledger__date">11.05.26</span><span class="ledger__name">SPL &amp; MPL Core</span><span class="mono ledger__tag">turbin3</span></li>
       <li><span class="mono ledger__date">12.05.26</span><span class="ledger__name">Noctex</span><span class="mono ledger__tag">hackathon</span></li>
       <li><span class="mono ledger__date">17.05.26</span><span class="ledger__name">Vault &amp; Escrow</span><span class="mono ledger__tag">turbin3</span></li>
+      <li><span class="mono ledger__date">20.05.26</span><span class="ledger__name">Capstone proposal</span><span class="mono ledger__tag">turbin3</span></li>
       <li><span class="mono ledger__date">22.05.26</span><span class="ledger__name">Constant-product AMM</span><span class="mono ledger__tag">turbin3</span></li>
       <li><span class="mono ledger__date">23.05.26</span><span class="ledger__name">Capstone user stories</span><span class="mono ledger__tag">turbin3</span></li>
       <li><span class="mono ledger__date">31.05.26</span><span class="ledger__name">NFT Staking &amp; Marketplace</span><span class="mono ledger__tag">turbin3</span></li>
       <li><span class="mono ledger__date">04.06.26</span><span class="ledger__name">Instruction Introspection</span><span class="mono ledger__tag">turbin3</span></li>
       <li><span class="mono ledger__date">05.06.26</span><span class="ledger__name">Raydium architecture</span><span class="mono ledger__tag">turbin3</span></li>
+      <li><span class="mono ledger__date">06.06.26</span><span class="ledger__name">Cardon architecture</span><span class="mono ledger__tag">turbin3</span></li>
       <li><span class="mono ledger__date">24.06.26</span><span class="ledger__name">Cardon</span><span class="mono ledger__tag">capstone</span></li>
       <li><span class="mono ledger__date">19.07.26</span><span class="ledger__name">Catenaccio</span><span class="mono ledger__tag">hackathon</span></li>
       <li><span class="mono ledger__date">20.07.26</span><span class="ledger__name">Foresight</span><span class="mono ledger__tag">mainnet</span></li>
       <li><span class="mono ledger__date">30.08.26</span><span class="ledger__name">Solana Basics</span><span class="mono ledger__tag">teaching</span></li>
+      <li><span class="mono ledger__date">10.09.26</span><span class="ledger__name">This page</span><span class="mono ledger__tag">index</span></li>
     </ol>
   </section>
 
@@ -569,7 +705,7 @@
     <a href="https://x.com/JanhaviChavada" target="_blank" rel="noopener"><span class="mono num">03</span> Twitter / X</a>
     <a href="https://linktr.ee/findjanhv" target="_blank" rel="noopener"><span class="mono num">04</span> Linktree</a>
   </nav>
-  <p class="foot__legal mono">JANHAVI CHAVADA &middot; PROOF OF WORK ON SOLANA &middot; NOV 2024 &ndash; JUL 2026</p>
+  <p class="foot__legal mono">JANHAVI CHAVADA &middot; PROOF OF WORK ON SOLANA &middot; NOV 2024 &ndash; SEP 2026</p>
 </footer>
 
 <div class="toast mono" id="toast" role="status" aria-live="polite">Copied</div>

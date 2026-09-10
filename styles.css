@@ -20,6 +20,7 @@
   --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   --pad: clamp(1.25rem, 4vw, 4.5rem);
+  --topbar-h: 62px;
   --maxw: 1400px;
 }
 
@@ -259,7 +260,7 @@ em { font-style: italic; }
 
 .filterbar {
   position: sticky;
-  top: 0;
+  top: var(--topbar-h);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -391,6 +392,31 @@ em { font-style: italic; }
   gap: 0.4rem;
   padding: 0;
   margin: 1.2rem 0 0;
+}
+
+/* technical spec table on each entry */
+.spec {
+  margin: 1.3rem 0 0;
+  border-top: 1px solid var(--line-soft);
+}
+.spec > div {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: baseline;
+}
+.spec dt { color: var(--ash); padding-top: 0.12rem; }
+.spec dd {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--bone-dim);
+}
+.spec dd .copy { font-size: 0.68rem; }
+@media (max-width: 520px) {
+  .spec > div { grid-template-columns: 1fr; gap: 0.2rem; }
 }
 
 .idline {
