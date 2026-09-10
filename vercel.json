@@ -1,0 +1,18 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/data/activity.json",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=600" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(js|css)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    }
+  ]
+}
