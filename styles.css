@@ -768,3 +768,6 @@ em { font-style: italic; }
   color: var(--ash);
   margin-top: 0.3rem;
 }
+
+/* anchor links land below the fixed top bar, not behind it */
+.sect, .hero { scroll-margin-top: calc(var(--topbar-h) + 1.2rem); }
