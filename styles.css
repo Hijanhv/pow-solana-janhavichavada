@@ -771,3 +771,20 @@ em { font-style: italic; }
 
 /* anchor links land below the fixed top bar, not behind it */
 .sect, .hero { scroll-margin-top: calc(var(--topbar-h) + 1.2rem); }
+
+/* the feed runs much longer than the histogram beside it; cap it so the two
+   panels stay the same height and the rest scrolls inside its own box */
+.feed {
+  max-height: 21rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  padding-right: 0.4rem;
+}
+.feed::-webkit-scrollbar { width: 6px; }
+.feed::-webkit-scrollbar-track { background: transparent; }
+.feed::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+.feed::-webkit-scrollbar-thumb:hover { background: var(--ash); }
+
+.live__split .panel { display: flex; flex-direction: column; }
+.live__split .panel .clock { margin-top: auto; }
