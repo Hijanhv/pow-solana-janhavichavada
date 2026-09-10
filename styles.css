@@ -566,3 +566,205 @@ em { font-style: italic; }
 }
 
 :focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; border-radius: 2px; }
+
+/* ============================================================
+   LIVE ACTIVITY
+   ============================================================ */
+
+.sect--live { padding-top: clamp(2.5rem, 6vw, 4.5rem); }
+.sect--live .sect__head { max-width: 66ch; }
+
+.live { display: grid; gap: clamp(1rem, 2vw, 1.5rem); }
+
+.stats--live { margin-top: 0; }
+.stats--live .stat dd { color: var(--acid); font-size: clamp(1.4rem, 2.6vw, 1.9rem); }
+.stats--live .stat:nth-child(n) dd { font-family: var(--serif); text-transform: none; letter-spacing: normal; padding-top: 0; }
+
+.panel {
+  border: 1px solid var(--line-soft);
+  background: rgba(234, 231, 221, 0.017);
+  padding: clamp(1rem, 2.2vw, 1.6rem);
+}
+
+.panel__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+.panel__head h3 {
+  margin: 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  font-weight: 500;
+  color: var(--bone);
+}
+.panel__head p { margin: 0; font-size: 0.6rem; }
+
+.panel__note {
+  margin: 1.1rem 0 0;
+  font-size: 0.83rem;
+  line-height: 1.5;
+  color: var(--ash);
+  max-width: 52ch;
+}
+
+.live__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+@media (max-width: 900px) { .live__split { grid-template-columns: 1fr; } }
+
+/* ---- heatmap ---- */
+
+.heat__scroll { overflow-x: auto; overflow-y: hidden; padding-bottom: 0.4rem; }
+.heat { display: inline-grid; gap: 0.35rem; min-width: 100%; }
+
+.heat__months {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--cell, 11px);
+  gap: 3px;
+  height: 0.95rem;
+}
+.heat__month {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  color: var(--ash);
+  grid-row: 1;
+  white-space: nowrap;
+}
+
+.heat__grid {
+  display: grid;
+  grid-template-rows: repeat(7, var(--cell, 11px));
+  grid-auto-flow: column;
+  grid-auto-columns: var(--cell, 11px);
+  gap: 3px;
+}
+
+.cell {
+  display: block;
+  width: var(--cell, 11px);
+  height: var(--cell, 11px);
+  border-radius: 2px;
+  background: rgba(234, 231, 221, 0.055);
+}
+.cell--pad { background: transparent; }
+.cell[data-level="1"] { background: rgba(216, 255, 62, 0.22); }
+.cell[data-level="2"] { background: rgba(216, 255, 62, 0.42); }
+.cell[data-level="3"] { background: rgba(216, 255, 62, 0.66); }
+.cell[data-level="4"] { background: var(--acid); }
+
+.heat__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+}
+.heat__foot p { margin: 0; font-size: 0.6rem; }
+.heat__legend { display: flex; align-items: center; gap: 0.28rem; font-size: 0.6rem; }
+.heat__legend .cell { width: 10px; height: 10px; }
+
+@media (max-width: 700px) { .heat { --cell: 10px; } }
+
+/* ---- hour of day ---- */
+
+.clock {
+  display: grid;
+  grid-template-columns: repeat(24, minmax(0, 1fr));
+  align-items: end;
+  gap: 3px;
+  height: 128px;
+  padding-bottom: 1.1rem;
+}
+.clock__bar {
+  position: relative;
+  height: max(2px, var(--h));
+  background: rgba(216, 255, 62, 0.3);
+  border-radius: 2px 2px 0 0;
+  transition: background 0.2s;
+}
+.clock__bar:hover { background: var(--acid); }
+.clock__bar.is-peak { background: rgba(216, 255, 62, 0.72); }
+.clock__tick {
+  position: absolute;
+  bottom: -1.05rem;
+  left: 0;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  color: var(--ash);
+}
+
+/* ---- push feed ---- */
+
+.feed { list-style: none; margin: 0; padding: 0; }
+.feed__item {
+  padding: 0.7rem 0 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--line-soft);
+  border-left: 1px solid transparent;
+  position: relative;
+}
+.feed__item:last-child { border-bottom: none; }
+.feed__item.is-live { border-left-color: var(--acid); }
+.feed__item.is-live::after {
+  content: "LIVE";
+  position: absolute;
+  top: 0.75rem; right: 0;
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  background: var(--acid);
+  padding: 0.1rem 0.3rem;
+  border-radius: 2px;
+}
+
+.feed__head { display: flex; align-items: baseline; gap: 0.7rem; margin: 0 0 0.2rem; flex-wrap: wrap; }
+.feed__repo {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--acid);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.feed__repo:hover { border-bottom-color: var(--acid); }
+.feed__when { font-size: 0.58rem; color: var(--ash); }
+.feed__msg { margin: 0; font-size: 0.9rem; line-height: 1.45; color: var(--bone-dim); }
+.feed__sha {
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  margin-top: 0.3rem;
+  font-size: 0.6rem;
+  color: var(--ash);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--line);
+}
+.feed__sha:hover { color: var(--bone); }
+
+/* ---- loading / failure ---- */
+
+.live[data-state="loading"] .panel,
+.live[data-state="loading"] .stats--live { opacity: 0.45; }
+.live__error { color: var(--flare); font-size: 0.62rem; margin: 0; }
+
+/* grid children default to min-width:auto, which would let the calendar push
+   the page wide instead of scrolling inside its own panel */
+.live > *, .live__split > *, .panel { min-width: 0; }
+
+.stat__sub {
+  display: block;
+  font-size: 0.55rem;
+  color: var(--ash);
+  margin-top: 0.3rem;
+}

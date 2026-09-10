@@ -24,6 +24,7 @@
 <header class="topbar" id="topbar">
   <a class="topbar__mark" href="#top">JC<span class="blip">&#9670;</span></a>
   <nav class="topbar__nav">
+    <a href="#activity">Activity</a>
     <a href="#flagship">Builds</a>
     <a href="#turbin3">Turbin3</a>
     <a href="#writing">Writing</a>
@@ -72,6 +73,71 @@
       <div class="stat"><dt class="mono">CLUSTERS</dt><dd>mainnet &middot; devnet</dd></div>
       <div class="stat"><dt class="mono">FIRST COMMIT</dt><dd>30.11.24</dd></div>
     </dl>
+  </section>
+
+  <!-- ==================== LIVE ACTIVITY ==================== -->
+  <section class="sect sect--live" id="activity">
+    <div class="sect__head">
+      <p class="mono label">LIVE &middot; <span id="synced">syncing&hellip;</span></p>
+      <h2>Still shipping</h2>
+      <p class="sect__note">Pulled straight from GitHub. The calendar is every contribution across all my repositories; the feed below it is filtered to Solana work only, so a push to an Anchor program shows up here and a push to something else does not.</p>
+    </div>
+
+    <div class="live" id="live" data-state="loading">
+
+      <dl class="stats stats--live" id="live-stats">
+        <div class="stat"><dt class="mono">CONTRIBUTIONS / YR</dt><dd data-slot="total">&mdash;</dd></div>
+        <div class="stat"><dt class="mono">ACTIVE DAYS</dt><dd data-slot="active">&mdash;</dd></div>
+        <div class="stat"><dt class="mono">LONGEST STREAK</dt><dd data-slot="longest">&mdash;</dd></div>
+        <div class="stat"><dt class="mono">BUSIEST DAY</dt><dd data-slot="busiest">&mdash;</dd></div>
+        <div class="stat"><dt class="mono">SOLANA REPOS</dt><dd data-slot="repos">&mdash;</dd></div>
+      </dl>
+
+      <div class="panel">
+        <div class="panel__head">
+          <h3 class="mono">CONTRIBUTION CALENDAR</h3>
+          <p class="mono dim" id="cal-range">&mdash;</p>
+        </div>
+        <div class="heat__scroll">
+          <div class="heat" id="heat" role="img" aria-label="GitHub contribution calendar for the last year"></div>
+        </div>
+        <div class="heat__foot">
+          <p class="mono dim">Each square is a day. Hover for the count.</p>
+          <div class="heat__legend mono dim">
+            Less
+            <span class="cell" data-level="0"></span>
+            <span class="cell" data-level="1"></span>
+            <span class="cell" data-level="2"></span>
+            <span class="cell" data-level="3"></span>
+            <span class="cell" data-level="4"></span>
+            More
+          </div>
+        </div>
+      </div>
+
+      <div class="live__split">
+
+        <div class="panel">
+          <div class="panel__head">
+            <h3 class="mono">WHEN THE COMMITS LAND</h3>
+            <p class="mono dim" id="clock-note">&mdash;</p>
+          </div>
+          <div class="clock" id="clock"></div>
+          <p class="panel__note">GitHub does not publish hours spent, so this is the honest proxy: the hour of day every Solana commit in the sample was authored. The sample grows each time the data refreshes.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel__head">
+            <h3 class="mono">LATEST SOLANA PUSHES</h3>
+            <p class="mono dim" id="feed-note">&mdash;</p>
+          </div>
+          <ol class="feed" id="feed"></ol>
+        </div>
+
+      </div>
+
+      <p class="live__error mono" id="live-error" hidden>GitHub data could not be loaded right now. Everything below is unaffected.</p>
+    </div>
   </section>
 
   <!-- ==================== FILTER ==================== -->
@@ -710,5 +776,6 @@
 
 <div class="toast mono" id="toast" role="status" aria-live="polite">Copied</div>
 <script src="script.js"></script>
+<script src="activity.js"></script>
 </body>
 </html>

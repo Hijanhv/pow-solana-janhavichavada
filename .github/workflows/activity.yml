@@ -1,0 +1,51 @@
+name: Refresh GitHub activity
+
+on:
+  schedule:
+    # Every three hours. GitHub queues cron jobs, so treat this as "roughly".
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build-activity.mjs'
+      - '.github/workflows/activity.yml'
+  # Lets any other repo ping this one right after a push:
+  #   gh api repos/Hijanhv/pow-solana-janhavichavada/dispatches -f event_type=refresh-activity
+  repository_dispatch:
+    types: [refresh-activity]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: activity
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Rebuild data/activity.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_USER: ${{ github.repository_owner }}
+        run: node scripts/build-activity.mjs
+
+      - name: Commit if the data moved
+        run: |
+          if git diff --quiet -- data/activity.json; then
+            echo "No change."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/activity.json
+          git commit -m "Refresh GitHub activity data"
+          git push
