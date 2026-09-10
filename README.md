@@ -1,7 +1,9 @@
 # Proof of Work on Solana
 
-A single-page record of everything I have built on Solana, from my first Anchor program in
-November 2024 through the Turbin3 Builders cohort and four hackathon submissions.
+A single-page record of everything I have built on Solana: 25 projects, from my first Anchor
+program in November 2024 through the full Turbin3 Builders cohort and four hackathon
+submissions. Every entry lists the technologies used, the cluster it runs on, the deployed
+program or mint address where there is one, and links to the repository and the live app.
 
 **Live site:** https://hijanhv.github.io/pow-solana-janhavichavada/
 
@@ -9,14 +11,17 @@ November 2024 through the Turbin3 Builders cohort and four hackathon submissions
 
 | Section | Contents |
 |---|---|
-| Shipped builds | 10 public projects with a live deployment: Favorites, Cliff Chain, Phantom Lottery, TalentPool, Charisma, PayCrew, Noctex, Cardon, Catenaccio, Foresight |
-| Turbin3 Builders cohort | The assignment set, written from scratch: environment, SPL + MPL Core, vault, escrow, constant-product AMM, NFT staking, NFT marketplace, instruction introspection, capstone user stories, Raydium and Cardon architecture studies |
-| Teaching and tooling | Solana Basics (a 30-lesson teaching deck) and the Solscan Enhanced explorer teardown |
+| Shipped builds (10) | Favorites, Cliff Chain, Phantom Lottery, TalentPool, Charisma, PayCrew, Noctex, Cardon, Catenaccio, Foresight |
+| Turbin3 Builders cohort (12) | Assignment 0, SPL + MPL Core, Anchor Vault, Anchor Escrow, constant-product AMM, NFT Staking, NFT Marketplace, Instruction Introspection, Capstone A1 (proposal and research), Capstone A2 (user stories), Raydium architecture study, Cardon architecture design |
+| Teaching and tooling (3) | Solana Basics (a 30-lesson teaching deck), the Solscan Enhanced explorer teardown, and this page |
 | Ledger | The whole run in date order |
 
 Each entry carries the account layout, PDA seeds, CPI pattern or design decision that made
-the project worth building, plus the devnet program IDs where one was deployed. Program IDs
-are click-to-copy.
+the project worth building, alongside a spec block naming the stack and the network. Program
+and mint addresses are click-to-copy and link out to the explorer.
+
+Filter the index by on-chain programs, dApps and frontends, hackathon submissions, Turbin3
+work, or writing and architecture.
 
 ## Running it
 
