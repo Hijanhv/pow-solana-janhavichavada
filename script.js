@@ -25,15 +25,67 @@
     targets.forEach(function (el) { io.observe(el); });
   }
 
-  /* ---------- top bar reveal ---------- */
+  /* ---------- top bar + scroll progress ---------- */
   var topbar = document.getElementById('topbar');
-  var lastY = 0;
-  window.addEventListener('scroll', function () {
+  var progress = document.getElementById('progress');
+  var ticking = false;
+
+  function onScroll() {
     var y = window.scrollY;
-    if (y > 420) topbar.classList.add('is-up');
-    else topbar.classList.remove('is-up');
-    lastY = y;
+    topbar.classList.toggle('is-up', y > 420);
+
+    if (progress) {
+      var span = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = 'scaleX(' + (span > 0 ? Math.min(1, y / span) : 0) + ')';
+    }
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(onScroll);
   }, { passive: true });
+  onScroll();
+
+  /* ---------- numbers count up when they scroll into view ---------- */
+  function countUp(node) {
+    var raw = node.textContent.trim();
+    var match = /^([\d,]+)(.*)$/.exec(raw);
+    if (!match) return;
+
+    var target = Number(match[1].replace(/,/g, ''));
+    var suffix = match[2] || '';
+    if (!target || target < 2) return;
+
+    var started = null;
+    var span = 950;
+
+    function step(now) {
+      if (started === null) started = now;
+      var t = Math.min(1, (now - started) / span);
+      var eased = 1 - Math.pow(1 - t, 3);
+      node.textContent = Math.round(target * eased).toLocaleString() + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+
+    node.textContent = '0' + suffix;
+    requestAnimationFrame(step);
+  }
+
+  if (!reduce && 'IntersectionObserver' in window) {
+    var numbers = new IntersectionObserver(function (rows) {
+      rows.forEach(function (row) {
+        if (!row.isIntersecting) return;
+        countUp(row.target);
+        numbers.unobserve(row.target);
+      });
+    }, { threshold: 0.6 });
+
+    // hero stats now; the live ones are rendered later by activity.js
+    document.querySelectorAll('.hero .stat dd').forEach(function (node) { numbers.observe(node); });
+    window.__countUpObserver = numbers;
+  }
 
   /* ---------- filters ---------- */
   var buttons = Array.prototype.slice.call(document.querySelectorAll('.chip--filter'));

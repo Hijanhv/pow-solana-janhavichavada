@@ -38,6 +38,23 @@
     return 'just now';
   }
 
+  // Charts animate on entry rather than on load, so they are not already
+  // finished by the time the reader scrolls down to them.
+  function whenVisible(node) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+      node.classList.add('is-in');
+      return;
+    }
+    var io = new IntersectionObserver(function (rows) {
+      rows.forEach(function (row) {
+        if (!row.isIntersecting) return;
+        row.target.classList.add('is-in');
+        io.unobserve(row.target);
+      });
+    }, { threshold: 0.15 });
+    io.observe(node);
+  }
+
   function slot(name, value) {
     var node = root.querySelector('[data-slot="' + name + '"]');
     if (node) node.textContent = value;
@@ -78,14 +95,25 @@
         months.appendChild(label);
       }
 
-      var cell = el('span', 'cell');
+      var label = (day.count === 0 ? 'No contributions' : day.count + (day.count === 1 ? ' contribution' : ' contributions')) + ' on ' + pretty(day.date);
+
+      // GitHub renders the profile graph for whatever period the query names,
+      // so a click lands on the month that day belongs to, that day selected.
+      var month = day.date.slice(0, 8);
+      var cell = el('a', 'cell');
+      cell.href = 'https://github.com/' + USER + '?tab=overview&from=' + month + '01&to=' + day.date;
+      cell.target = '_blank';
+      cell.rel = 'noopener';
       cell.setAttribute('data-level', String(day.level));
-      cell.title = (day.count === 0 ? 'No contributions' : day.count + (day.count === 1 ? ' contribution' : ' contributions')) + ' on ' + pretty(day.date);
+      cell.setAttribute('aria-label', label);
+      cell.title = label + ' — open on GitHub';
+      cell.style.animationDelay = (Math.min(column, 53) * 9) + 'ms';
       grid.appendChild(cell);
     });
 
     host.appendChild(months);
     host.appendChild(grid);
+    whenVisible(host);
 
     var range = document.getElementById('cal-range');
     if (range) range.textContent = pretty(days[0].date) + ' → ' + pretty(days[days.length - 1].date);
@@ -112,8 +140,11 @@
         var tick = el('span', 'clock__tick', String(hour).padStart(2, '0'));
         bar.appendChild(tick);
       }
+      bar.style.animationDelay = (hour * 26) + 'ms';
       host.appendChild(bar);
     });
+
+    whenVisible(host);
 
     var note = document.getElementById('clock-note');
     if (note) {
@@ -211,10 +242,18 @@
       slot('busiest', data.calendar.busiest ? data.calendar.busiest.count : '—');
       slot('repos', data.repos.length);
 
+      // Hand these to the shared count-up observer while each value is still a
+      // bare number, then hang the date underneath so the animation cannot eat it.
+      if (window.__countUpObserver) {
+        root.querySelectorAll('.stats--live .stat dd').forEach(function (node) {
+          window.__countUpObserver.observe(node);
+        });
+      }
+
       var busiestStat = root.querySelector('[data-slot="busiest"]');
       if (busiestStat && data.calendar.busiest) {
         busiestStat.title = data.calendar.busiest.count + ' contributions on ' + pretty(data.calendar.busiest.date);
-        busiestStat.appendChild(el('span', 'stat__sub mono', pretty(data.calendar.busiest.date)));
+        busiestStat.parentNode.appendChild(el('p', 'stat__sub mono', pretty(data.calendar.busiest.date)));
       }
 
       drawHeatmap(data.calendar);

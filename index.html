@@ -20,6 +20,7 @@
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="topbar" id="topbar">
   <a class="topbar__mark" href="#top">JC<span class="blip">&#9670;</span></a>
@@ -43,8 +44,8 @@
     </div>
 
     <h1 class="hero__title">
-      <span class="line">Proof of Work</span>
-      <span class="line indent">on <em>Solana</em></span>
+      <span class="line"><span>Proof of Work</span></span>
+      <span class="line indent"><span>on <em>Solana</em></span></span>
     </h1>
 
     <div class="hero__grid">
@@ -96,13 +97,14 @@
       <div class="panel">
         <div class="panel__head">
           <h3 class="mono">CONTRIBUTION CALENDAR</h3>
-          <p class="mono dim" id="cal-range">&mdash;</p>
+          <a class="heat__cta" href="https://github.com/Hijanhv?tab=overview" target="_blank" rel="noopener">Open on GitHub &#8599;</a>
         </div>
         <div class="heat__scroll">
           <div class="heat" id="heat" role="img" aria-label="GitHub contribution calendar for the last year"></div>
         </div>
         <div class="heat__foot">
-          <p class="mono dim">Each square is a day. Hover for the count.</p>
+          <p class="mono dim" id="cal-range">&mdash;</p>
+          <p class="mono dim">Click any day to open it on GitHub.</p>
           <div class="heat__legend mono dim">
             Less
             <span class="cell" data-level="0"></span>
